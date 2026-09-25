@@ -1,20 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useFitLog } from "@/context/FitLogContext";
-import {
-  Plus,
-  Bookmark,
-  Check,
-  BookmarkCheck,
-  Clock,
-  Flame,
-  Star,
-  Dumbbell,
-  BarChart2,
-  Layers,
-  Repeat,
-} from "lucide-react";
+import { Plus, Bookmark, Check, BookmarkCheck } from "lucide-react";
 
 export interface WorkoutDetail {
   id: string;
@@ -58,12 +47,22 @@ export default function WorkoutDetailClient({ workout }: { workout: WorkoutDetai
     });
   };
 
+  const specRows = [
+    { label: "EQUIPMENT", value: workout.equipment },
+    { label: "DIFFICULTY", value: workout.difficulty },
+    { label: "SETS", value: workout.sets.toString() },
+    { label: "REPS", value: workout.reps },
+    { label: "DURATION", value: `${workout.duration} min` },
+    { label: "CALORIES", value: `${workout.calories} kcal` },
+    { label: "RATING", value: workout.rating.toString() },
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
         
-        {/* Left Side — Visual/Media Column */}
-        <div className="relative w-full h-[380px] sm:h-[480px] lg:h-[620px] bg-[#121318] border border-zinc-800/80 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl sticky top-24">
+        {/* Left Side — Visual Image */}
+        <div className="relative w-full h-[360px] sm:h-[480px] lg:h-[600px] bg-[#121318] border border-zinc-800/80 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
           <Image
             src={workout.image}
             alt={workout.name}
@@ -74,136 +73,72 @@ export default function WorkoutDetailClient({ workout }: { workout: WorkoutDetai
           />
         </div>
 
-        {/* Right Side — Workout Information */}
+        {/* Right Side — Info & Specs */}
         <div className="flex flex-col">
           
+          {/* Title */}
+          <h1 className="font-oswald text-4xl sm:text-5xl font-extrabold uppercase text-white tracking-wide mb-3">
+            {workout.name}
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
+            {workout.description}
+          </p>
+
           {/* Category Tags */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-8">
             {workout.categories.map((cat, idx) => (
               <span
                 key={idx}
-                className="bg-[#ccff00] text-black font-extrabold text-xs tracking-wider uppercase px-3 py-1 rounded-sm"
+                className="bg-[#ccff00] text-black font-extrabold text-xs tracking-wider uppercase px-3 py-1 rounded-full"
               >
                 {cat}
               </span>
             ))}
           </div>
 
-          {/* Title & Subtitle */}
-          <h1 className="font-oswald text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase text-white tracking-tight leading-none mb-4">
-            {workout.name}
-          </h1>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-8">
-            {workout.description}
-          </p>
-
-          {/* Key Specs Panel */}
+          {/* Key Specs Row Table */}
           <div className="bg-[#121318] border border-zinc-800/80 rounded-2xl p-6 mb-8">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">
-              KEY SPECS
-            </h3>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-[#181920] p-3.5 rounded-xl border border-zinc-800/50">
-                <div className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium mb-1">
-                  <Dumbbell className="w-3.5 h-3.5 text-[#ccff00]" />
-                  <span>Equipment</span>
+            <div className="divide-y divide-zinc-800/70">
+              {specRows.map((spec, idx) => (
+                <div key={idx} className="flex justify-between items-center py-3.5 first:pt-0 last:pb-0">
+                  <span className="text-zinc-500 font-bold text-xs tracking-widest uppercase">
+                    {spec.label}
+                  </span>
+                  <span className="text-zinc-200 font-semibold text-sm">
+                    {spec.value}
+                  </span>
                 </div>
-                <p className="text-zinc-200 text-xs sm:text-sm font-bold truncate">
-                  {workout.equipment}
-                </p>
-              </div>
-
-              <div className="bg-[#181920] p-3.5 rounded-xl border border-zinc-800/50">
-                <div className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium mb-1">
-                  <BarChart2 className="w-3.5 h-3.5 text-[#ccff00]" />
-                  <span>Difficulty</span>
-                </div>
-                <p className="text-zinc-200 text-xs sm:text-sm font-bold">
-                  {workout.difficulty}
-                </p>
-              </div>
-
-              <div className="bg-[#181920] p-3.5 rounded-xl border border-zinc-800/50">
-                <div className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium mb-1">
-                  <Layers className="w-3.5 h-3.5 text-[#ccff00]" />
-                  <span>Sets</span>
-                </div>
-                <p className="text-zinc-200 text-xs sm:text-sm font-bold">
-                  {workout.sets}
-                </p>
-              </div>
-
-              <div className="bg-[#181920] p-3.5 rounded-xl border border-zinc-800/50">
-                <div className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium mb-1">
-                  <Repeat className="w-3.5 h-3.5 text-[#ccff00]" />
-                  <span>Reps</span>
-                </div>
-                <p className="text-zinc-200 text-xs sm:text-sm font-bold">
-                  {workout.reps}
-                </p>
-              </div>
-
-              <div className="bg-[#181920] p-3.5 rounded-xl border border-zinc-800/50">
-                <div className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium mb-1">
-                  <Clock className="w-3.5 h-3.5 text-[#ccff00]" />
-                  <span>Duration</span>
-                </div>
-                <p className="text-zinc-200 text-xs sm:text-sm font-bold">
-                  {workout.duration} min
-                </p>
-              </div>
-
-              <div className="bg-[#181920] p-3.5 rounded-xl border border-zinc-800/50">
-                <div className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium mb-1">
-                  <Flame className="w-3.5 h-3.5 text-[#ccff00]" />
-                  <span>Calories</span>
-                </div>
-                <p className="text-zinc-200 text-xs sm:text-sm font-bold">
-                  {workout.calories} kcal
-                </p>
-              </div>
-
-              <div className="bg-[#181920] p-3.5 rounded-xl border border-zinc-800/50 col-span-2 sm:col-span-2">
-                <div className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium mb-1">
-                  <Star className="w-3.5 h-3.5 text-[#ccff00]" />
-                  <span>Rating</span>
-                </div>
-                <p className="text-zinc-200 text-xs sm:text-sm font-bold">
-                  {workout.rating} / 5.0
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Instructions Section */}
-          <div className="mb-10">
-            <h3 className="font-oswald text-2xl font-bold uppercase text-white tracking-wide mb-4">
+          {/* Instructions */}
+          <div className="mb-8">
+            <h3 className="font-oswald text-xl font-bold uppercase text-white tracking-wide mb-4">
               INSTRUCTIONS
             </h3>
-
             <ol className="space-y-3">
               {workout.instructions.map((step, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-4 bg-[#121318] border border-zinc-800/60 p-4 rounded-xl"
+                  className="flex items-start gap-3.5 text-zinc-300 text-sm leading-relaxed"
                 >
-                  <span className="w-7 h-7 rounded-full bg-[#1d2a05] text-[#ccff00] font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">
-                    {index + 1}
+                  <span className="font-bold text-zinc-400 shrink-0">
+                    {index + 1}.
                   </span>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
-                    {step}
-                  </p>
+                  <span>{step}</span>
                 </li>
               ))}
             </ol>
           </div>
 
-          {/* Call-to-Action Buttons */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={handleAddToPlan}
-              className={`flex-1 flex items-center justify-center gap-2 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-4 rounded-xl transition-all duration-200 cursor-pointer ${
+              className={`flex-1 flex items-center justify-center gap-2 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-lg transition-all duration-200 cursor-pointer ${
                 isPlanned
                   ? "bg-zinc-800 text-zinc-400 border border-zinc-700"
                   : "bg-[#ccff00] hover:bg-[#b3e600] text-black active:scale-95"
@@ -212,22 +147,22 @@ export default function WorkoutDetailClient({ workout }: { workout: WorkoutDetai
               {isPlanned ? (
                 <>
                   <Check className="w-4 h-4 stroke-[3]" />
-                  <span>Added to Today&apos;s Plan</span>
+                  <span>Added to plan</span>
                 </>
               ) : (
                 <>
                   <Plus className="w-4 h-4 stroke-[3]" />
-                  <span>Add to Today&apos;s Plan</span>
+                  <span>Add to today&apos;s plan</span>
                 </>
               )}
             </button>
 
             <button
               onClick={handleToggleSaved}
-              className={`flex-1 flex items-center justify-center gap-2 font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-4 rounded-xl border transition-all duration-200 cursor-pointer ${
+              className={`flex-1 flex items-center justify-center gap-2 font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-lg border transition-all duration-200 cursor-pointer ${
                 isSaved
                   ? "bg-zinc-800 text-[#ccff00] border-[#ccff00]/40"
-                  : "bg-zinc-900 border-zinc-700 hover:border-zinc-500 text-zinc-200 hover:text-white active:scale-95"
+                  : "bg-zinc-900 border-zinc-800 hover:border-zinc-600 text-zinc-300 hover:text-white active:scale-95"
               }`}
             >
               {isSaved ? (
@@ -238,7 +173,7 @@ export default function WorkoutDetailClient({ workout }: { workout: WorkoutDetai
               ) : (
                 <>
                   <Bookmark className="w-4 h-4" />
-                  <span>Save for Later</span>
+                  <span>Save for later</span>
                 </>
               )}
             </button>
