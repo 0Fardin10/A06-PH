@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:css": "npx @tailwindcss/cli -i src/app/globals.css -o public/output.css"
   },
   "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
     "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -19,9 +21,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "daisyui": "^5.7.46",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5"
   }
 }
