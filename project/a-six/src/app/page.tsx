@@ -1,14 +1,11 @@
-import Hero from "./components/Hero";
+import Hero from "@/components/Hero";
+import WorkoutLibrary from "@/components/WorkoutLibrary";
 
 export default function Home() {
   return (
-    <div className="bg-[#0c0d10] min-h-screen text-white">
+    <main className="w-full">
       <Hero />
-      
-      {/* The Library Section Anchor */}
-      <section id="library" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* Next step: Workout Grid */}
-      </section>
-    </div>
+      <WorkoutLibrary />
+    </main>
   );
 }

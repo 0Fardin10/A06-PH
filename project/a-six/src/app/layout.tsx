@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import { FitLogProvider } from "@/context/FitLogContext"; 
 import { Toaster } from "react-hot-toast";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 import "./globals.css";
 
 const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
