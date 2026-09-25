@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
   const scrollToLibrary = () => {
@@ -12,16 +13,16 @@ export default function Hero() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
-      {/* Penpot Dark Card Container */}
+      {/* Dark Card Container */}
       <div className="bg-[#121318] border border-zinc-800/80 rounded-2xl md:rounded-3xl p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
         
-        {/* Left Side Content */}
+        {/* Left Side: Content */}
         <div className="flex-1 max-w-2xl text-left z-10">
           <p className="text-[#ccff00] font-bold tracking-widest text-xs sm:text-sm uppercase mb-4">
             WORKOUT LIBRARY
           </p>
 
-          <h1 className="font-oswald text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase text-white tracking-tight leading-[1.1] mb-6">
+          <h1 className="font-oswald text-4xl sm:text-5xl lg:text-7xl font-extrabold uppercase text-white tracking-tight leading-[1.05] mb-6">
             TRAIN WITH INTENT. <br />
             LOG EVERY SET.
           </h1>
@@ -33,13 +34,14 @@ export default function Hero() {
 
           <button
             onClick={scrollToLibrary}
-            className="bg-[#ccff00] hover:bg-[#b3e600] text-black font-extrabold text-xs sm:text-sm tracking-wider uppercase px-6 py-3.5 rounded-lg transition-all duration-200 transform active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 bg-[#ccff00] hover:bg-[#b3e600] text-black font-extrabold text-xs sm:text-sm tracking-wider uppercase px-6 py-3.5 rounded-lg transition-all duration-200 transform active:scale-95 cursor-pointer"
           >
-            BROWSE WORKOUTS
+            <span>BROWSE WORKOUTS</span>
+            {/* <ArrowDown className="w-4 h-4 stroke-[3]" /> */}
           </button>
         </div>
 
-        {/* Right Side 3D Banner */}
+        {/* Right Side: Banner Image */}
         <div className="flex-1 w-full flex justify-center md:justify-end items-center z-10">
           <div className="relative w-full max-w-[320px] sm:max-w-[420px] flex items-center justify-center">
             <Image
@@ -47,7 +49,7 @@ export default function Hero() {
               alt="FitLog Gym Companion"
               width={450}
               height={450}
-              className="object-contain w-full h-auto drop-shadow-2xl hover:scale-105 transition duration-500"
+              className="object-contain w-full h-auto drop-shadow-2xl"
               priority
             />
           </div>
