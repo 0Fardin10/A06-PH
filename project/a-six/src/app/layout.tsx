@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { FitLogProvider } from "@/context/FitLogContext";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Footer";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -43,8 +44,10 @@ export default function RootLayout({
             }}
           />
           <Navbar />
+
           <main>{children}</main>
         </FitLogProvider>
+        <Footer />
       </body>
     </html>
   );
