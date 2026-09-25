@@ -1,58 +1,52 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
   const scrollToLibrary = () => {
-    const librarySection = document.getElementById("library");
-    if (librarySection) {
-      librarySection.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById("library");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
-      {/* Dark Card Container */}
-      <div className="bg-[#121318] border border-zinc-800/80 rounded-2xl md:rounded-3xl p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
+      <div className="bg-[#12141c] border border-zinc-800/80 rounded-3xl p-8 sm:p-12 md:p-14 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
         
-        {/* Left Side: Content */}
-        <div className="flex-1 max-w-2xl text-left z-10">
-          <p className="text-[#ccff00] font-bold tracking-widest text-xs sm:text-sm uppercase mb-4">
+        {/* Left Content */}
+        <div className="max-w-xl z-10 text-left">
+          <span className="text-[#ccff00] font-extrabold text-xs tracking-widest uppercase mb-4 block">
             WORKOUT LIBRARY
-          </p>
+          </span>
 
-          <h1 className="font-oswald text-4xl sm:text-5xl lg:text-7xl font-extrabold uppercase text-white tracking-tight leading-[1.05] mb-6">
-            TRAIN WITH INTENT. <br />
-            LOG EVERY SET.
+          <h1 className="font-oswald text-4xl sm:text-6xl font-black uppercase text-white tracking-tight leading-[1.05] mb-5">
+            TRAIN WITH INTENT. <br /> LOG EVERY SET.
           </h1>
 
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
+          <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-8 max-w-md font-medium">
             FitLog is a dark, no-nonsense gym companion: pick a lift, lock it
             into today&apos;s plan, and watch the week&apos;s work add up.
           </p>
 
           <button
             onClick={scrollToLibrary}
-            className="inline-flex items-center gap-2 bg-[#ccff00] hover:bg-[#b3e600] text-black font-extrabold text-xs sm:text-sm tracking-wider uppercase px-6 py-3.5 rounded-lg transition-all duration-200 transform active:scale-95 cursor-pointer"
+            className="bg-[#ccff00] hover:bg-[#b3e600] text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-lg transition-all active:scale-95 cursor-pointer shadow-lg shadow-[#ccff00]/10"
           >
-            <span>BROWSE WORKOUTS</span>
-            {/* <ArrowDown className="w-4 h-4 stroke-[3]" /> */}
+            BROWSE WORKOUTS
           </button>
         </div>
 
-        {/* Right Side: Banner Image */}
-        <div className="flex-1 w-full flex justify-center md:justify-end items-center z-10">
-          <div className="relative w-full max-w-[320px] sm:max-w-[420px] flex items-center justify-center">
-            <Image
-              src="/assets/banner.png"
-              alt="FitLog Gym Companion"
-              width={450}
-              height={450}
-              className="object-contain w-full h-auto drop-shadow-2xl"
-              priority
-            />
-          </div>
+        {/* Right Gym Machine Image */}
+        <div className="relative w-full md:w-[380px] h-[260px] sm:h-[320px] shrink-0 z-10 flex items-center justify-center">
+          <Image
+            src="/assets/banner.png"
+            alt="Gym Machine"
+            fill
+            unoptimized
+            className="object-contain"
+            priority
+          />
         </div>
 
       </div>
